@@ -16,11 +16,14 @@ with open(file_name) as fp:
     for line in Lines:
         count += 1
         lineValue = line.strip()
-        try:
-        	for i in range(2,10):
-        		result = lineValue % i
-        		if result == 0:
-        			print("{}={}*{}".format(lineValue,result,i))
-        			break
-        except:
-        	raise TypeError("Data no valide at line {}.".format(count))
+        if isinstance(lineValue, int) and lineValue > 1:
+        	try:
+        		for i in range(2,round(lineValue/2)):
+        			result = lineValue % i
+        			if result == 0:
+        				print("{}={}*{}".format(lineValue,result,i))
+        				break
+        	except Exception:
+        		pass
+        else:
+        	raise TypeError("Data no valide at line {}. All line must conatin number gretter than 1 and no space arround the number.".format(count))
